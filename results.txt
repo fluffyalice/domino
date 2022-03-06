@@ -1,0 +1,53 @@
+author: Ruiqing Xu
+time: 12.13
+email: rxu22@sheffield.ac.uk
+
+Experimental report
+
+1. The experimental method:
+
+    Using domsMatch P1, P2, 1000 31, P1 and P2 can be:
+    randomPlayer, idiotGreedyPlayer, smartGreedyPlayer, cleverPlayer. 
+    The first three types of players can run domsMatch directly for testing.
+    CleverPlayer tests it in a special way.
+
+2. The experimental results：
+
+    i. Direct play:
+
+        RandomPlayer vs randomPlayer = (506,494)
+        IdiotGreedyPlayer vs randomPlayer = (973,27)
+        SmartGreedyPlayer vs idiotGreedyPlayer = (562,438)
+        CleverPlayer vs smartGreedyPlayer = (620,380)
+        (During the development process, there was also a verySmartGreedyPlayer which was obviously better than the smartGreedyPlayer when tested, but was later renamed verySmartGreedy Tactic, so they couldn't be tested.)
+
+    ii. Strategy:
+
+        CleverPlayer uses a variety of strategies, including:
+        1. Guessing the opponent's cards.
+        2. Blocking the opponent.
+        3. Blocking myself.
+        4. Blocking both players.
+        5. Filter out the cards that help the opponent score 61 points after I play cards.
+        6. Trying to avoid the opponent scoring high points.
+        7. When blocking an opponent, consider choosing a card which will give me the highest score next move.
+
+        To demonstrate that each strategy improves the win ratio, first run cleverPlayer vs. smartGreedyPlayer and get (620,380)
+        Then replace the key code for one certain strategy with a random strategy and run cleverPlayer vs. smartGreedyPlayer again.
+        If the running results are worse than (620,380), it proves that each strategy improves the winning rate.
+
+    iii. Here are the test results:
+
+        Cancel the opening strategy                                                                (620,380)
+        Eliminate preferential play for 61 points                                                  (545,455)
+        Random strategy instead of bad card strategy                                               (620,380)
+        Random strategy instead of super-smart greedy strategy                                     (33,967)
+        Random Strategy instead of blocking strategy                                               (612,388)
+        Does not select my next highest score card while blocking the opponent                     (618,382)
+        Guessing the opponent's cards does not assume that the opponent is using a greedy strategy (578,422)
+        Do not take advantage of an opponent's block when guessing his cards                       (615,385)
+        Don't guess, I always assume that my opponent has 9+10 cards                               (527,473)
+
+3. Conclusion:
+
+    Most strategies raise the winning interest rate, with only two exceptions. The two exceptions are the opening strategy and the bad card strategy.
